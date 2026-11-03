@@ -58,6 +58,48 @@ Hierbei werden unter anderem folgende Verfahren eingesetzt:
 - **Dwell-Time-Analyse:** Berechnung blickbasierter Aufenthaltszeiten innerhalb der Bildbereiche.
 
 Die Python-Auswertung ist nicht Bestandteil dieses Android-Repositories.
+## Technische Herausforderungen und Lösungsansätze
+
+### 1. Kamerabasierte Blickschätzung und Kalibrierungsgenauigkeit
+
+Eine wesentliche Herausforderung bestand darin, aus den mit der Smartphone-Frontkamera aufgezeichneten Videos geeignete Merkmale zur Schätzung der Blickposition auf dem Bildschirm zu gewinnen.
+
+Hierzu wurde eine teilnehmerspezifische Kalibrierung mit 25 Zielpositionen in einem 5 × 5-Raster eingesetzt. Die extrahierten Blickmerkmale wurden den bekannten Bildschirmkoordinaten zugeordnet, um individuelle Kalibrierungsabbildungen zu bestimmen.
+
+Die Genauigkeit der Blickschätzung wurde anhand verschiedener Fehlerkennzahlen, darunter Mean Absolute Error (MAE), Median und 90. Perzentil (P90), untersucht.
+
+### 2. Vergleich von MediaPipe und L2CS-Net
+
+Im Rahmen der Python-basierten Videoanalyse wurden unterschiedliche Merkmale von MediaPipe und L2CS-Net hinsichtlich ihrer Eignung zur horizontalen und vertikalen Blickschätzung verglichen.
+
+Die Auswertung zeigte, dass die untersuchten Merkmale je nach Koordinatenrichtung unterschiedliche Eigenschaften aufweisen.
+
+Auf Grundlage der Kalibrierungsanalyse wurde für die horizontale Blickschätzung das MediaPipe-Merkmal *Both Eyes X* und für die vertikale Blickschätzung die *true-Pitch*-Komponente von L2CS-Net verwendet.
+
+Dieser Ansatz ermöglicht die getrennte Modellierung der horizontalen und vertikalen Blickkoordinaten.
+
+### 3. Berücksichtigung von Kalibrierungsabweichungen bei der ROI-Analyse
+
+Eine weitere Herausforderung bestand darin, geschätzte Blickpositionen den während des mobilen Spiels eingeblendeten Bildbereichen zuzuordnen.
+
+Dazu wurden zwei Auswertungsvarianten implementiert:
+
+- **Strict ROI:** Berücksichtigung ausschließlich der tatsächlichen Bildgrenzen.
+- **Tolerant ROI:** Erweiterung der Bildgrenzen anhand der teilnehmerspezifischen P90-Kalibrierungsabweichungen in horizontaler und vertikaler Richtung.
+
+Für beide Varianten wurden blickbasierte Aufenthaltszeiten (*Dwell Time*) berechnet.
+
+Der Vergleich ermöglicht es, die Auswirkungen der Kalibrierungsunsicherheit auf die Zuordnung der geschätzten Blickpositionen zu den Bildbereichen zu untersuchen.
+
+### 4. Trennung von Datenerfassung und Blickdatenanalyse
+
+Die Datenerfassung und die Blickdatenanalyse wurden als getrennte Verarbeitungsschritte umgesetzt.
+
+Die Android-Anwendung übernimmt die Versuchsdurchführung, die Videoaufzeichnung mit CameraX sowie die Speicherung der zugehörigen Versuchsdaten.
+
+Die anschließende Blickschätzung und Auswertung erfolgen offline mithilfe einer separaten Python-Pipeline.
+
+Diese Trennung ermöglicht es, unterschiedliche Verfahren zur Blickschätzung zu vergleichen und die Auswertungsmethodik weiterzuentwickeln, ohne die Android-Anwendung für jede Analyseänderung anpassen zu müssen.
 
 ## Projektarchitektur
 
