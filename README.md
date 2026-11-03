@@ -105,6 +105,53 @@ Diese Trennung ermöglicht es, unterschiedliche Verfahren zur Blickschätzung zu
 
 Android-Anwendung → Videoaufzeichnung und Versuchsdaten → Python-Auswertung → Blickkoordinaten und ROI-Analyse → Ergebnisdateien
 
+## Installation und Ausführung
+
+### Voraussetzungen
+
+Für die Installation und Ausführung der Android-Anwendung werden folgende Komponenten benötigt:
+
+- Android Studio
+- Ein kompatibles Android-Smartphone mit Frontkamera
+- Eine USB-Verbindung oder eine drahtlose Debugging-Verbindung
+- Eine Internetverbindung für den erstmaligen Download der Projektabhängigkeiten
+
+### Projekt herunterladen
+
+Das Repository kann über Git geklont werden:
+
+```bash
+git clone https://github.com/abdulhtwsaar/VisualAttentionStudy.git
+```
+
+Alternativ kann das Projekt über GitHub als ZIP-Datei heruntergeladen werden.
+
+### Anwendung starten
+
+1. Android Studio öffnen.
+2. Das heruntergeladene Projekt über **Open** auswählen.
+3. Die Gradle-Synchronisierung abwarten.
+4. Ein Android-Smartphone verbinden und gegebenenfalls USB-Debugging aktivieren.
+5. Das Smartphone als Zielgerät auswählen.
+6. Die Anwendung über **Run** installieren und starten.
+7. Die erforderlichen Kameraberechtigungen erteilen.
+
+### Durchführung
+
+Nach dem Start der Anwendung können die Teilnehmerinformationen eingegeben und die Kalibrierung durchgeführt werden.
+
+Anschließend folgen der visuelle Aufmerksamkeitstest und der Wiedererkennungstest.
+
+Die während der Versuchsdurchführung erfassten Daten werden lokal auf dem Smartphone gespeichert.
+
+### Hinweis zur Auswertung
+
+Die Android-Anwendung dient der Durchführung der Versuche und der Datenerfassung.
+
+Die eigentliche Blickschätzung erfolgt anschließend offline über eine separate Python-Auswertungspipeline mit MediaPipe und L2CS-Net.
+
+Diese Python-Pipeline ist nicht Bestandteil dieses GitHub-Repositories.
+
 ## Wissenschaftlicher Kontext
 
 Das Projekt dient der Untersuchung der technischen Möglichkeiten und Grenzen eines kamerabasierten Eye-Tracking-Ansatzes auf handelsüblichen Android-Smartphones.
