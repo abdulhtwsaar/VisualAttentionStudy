@@ -6,6 +6,13 @@
 
 Dieses Projekt entstand im Rahmen meiner Bachelorarbeit im Studiengang Biomedizinische Technik an der htw saar.
 
+## Systemarchitektur
+
+Die folgende Abbildung zeigt den Aufbau des entwickelten Systems sowie den Datenfluss zwischen der Android-Anwendung und der nachgelagerten Python-Auswertung.
+
+![Systemarchitektur der Eye-Tracking-Anwendung](systemarchitektur.png)
+
+
 **Titel der Bachelorarbeit:**
 
 *Kamerabasiertes Eye-Tracking zur Blickdatenanalyse auf Android-Smartphones am Beispiel eines mobilen Spiels*
